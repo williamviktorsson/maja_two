@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>
+        My First Page
+    </title>
+
+    <style>
+        body {
+            color: red;
+            background-color: pink;
+        }
+
+        h1 {
+            color: greenyellow;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 8em;
+        }
+
+        p {
+            font-size: 2em;
+            color: black;
+        }
+
+        .tjenix {
+            font-size: 10em;
+            color: purple;
+        }
+
+        #test {
+            font-size: 4em;
+            color: indianred;
+        }
+    </style>
+
+    <script src="./clock.js"></script>
+
+</head>
+
+<body>
+    <h1>
+        Hehej
+    </h1>
+
+    <p>
+        Tid
+    </p>
+
+    <button onclick="updateTime()">
+        HIT ME!
+    </button>
+
+    <p id="time">
+
+    </p>
+
+    <p id="alarm">
+
+    </p>
+
+    <p id="test">
+        1231231231!
+    </p>
+
+    <p class="tjenix">
+        1231231231!
+    </p>
+
+    <script> // script tag runs on page load
+
+        let clock = new Clock(13, 37)
+
+        let alarm = "13:50"
+
+        document.getElementById("time").innerHTML = clock.time
+
+        function updateTime() {
+            clock.tick()
+            document.getElementById("time").innerHTML = clock.time
+            if (clock.time == alarm) {
+                document.getElementById("alarm").innerHTML = "VAKNA"
+
+            }
+        }
+
+        window.setInterval(updateTime, 1000)
+
+    </script>
+
+</body>
+
+</html>
