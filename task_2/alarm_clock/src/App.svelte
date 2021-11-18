@@ -2,9 +2,9 @@
     import { Clock } from "./clock.js";
     import SickButton from "./SickButton.svelte";
 
-    let clock = new Clock(13,37);
+    let clock = new Clock(13, 37);
 
-    clock.alarm="13:50";
+    clock.alarm = "13:50";
 
     let students = [1, 2, 3];
 
@@ -26,8 +26,6 @@
         students: {students}
     </h2>
 
-    <input bind:value={clock.alarm}>
-
     <button on:click={() => (students = [...students, students.length])}
         >add student</button
     >
@@ -39,6 +37,8 @@
     {#if clock.isTriggered}
         <p>VAKNA!!!</p>
     {/if}
+
+    <input bind:value={clock.alarm} />
 
     <button on:click={tick}> HIT ME! </button>
 

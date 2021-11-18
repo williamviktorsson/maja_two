@@ -4,7 +4,7 @@ export class Clock {
     constructor(hour = 0, minute = 0) {
         this._hour = hour;
         this._minute = minute;
-
+        
     }
 
     tick() {
@@ -15,16 +15,16 @@ export class Clock {
         }
     }
 
-    set alarm(alarm) {
-        this._alarm = alarm;
+    set alarm(alarm){
+        this._alarm=alarm;
     }
 
-    get alarm() {
+    get alarm(){
         return this._alarm;
     }
 
-    get isTriggered() {
-        return this.time >= this.alarm
+    get isTriggered(){
+        return this.time>=this.alarm
     }
 
     get time() {
