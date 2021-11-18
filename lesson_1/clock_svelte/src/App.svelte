@@ -1,5 +1,6 @@
 <script>
     import { Clock } from "./clock";
+    import SickButton from "./SickButton.svelte";
 
     let clock = new Clock();
 
@@ -17,39 +18,42 @@
 </script>
 
 <main>
-    <h1>Hehej {i}</h1>
+<h1>Hehej {i}</h1>
 
-    <h2>
-        students: {students}
-    </h2>
+<h2>
+    students: {students}
+</h2>
 
-    <button on:click={() => (students = [...students, students.length])}
-        >add student</button
-    >
+<button on:click={() => (students = [...students, students.length])}
+    >add student</button
+>
 
-    <p>
-        Tid: {clock.time}
-    </p>
+<p>
+    Tid: {clock.time}
+</p>
 
-    {#if clock.time == "13:50"}
-        <p>VAKNA!!!</p>
-    {/if}
+{#if clock.time == "13:50"}
+    <p>VAKNA!!!</p>
+{/if}
 
-    <button on:click={tick}> HIT ME! </button>
+<button on:click={tick}> HIT ME! </button>
 
-    <p id="time" />
+<p id="time" />
 
-    <p id="alarm" />
+<p id="alarm" />
 
-    <p id="test">1231231231!</p>
+<SickButton />
 
-    <p class="tjenix">1231231231!</p>
+<p id="test">1231231231!</p>
+
+<p class="tjenix">1231231231!</p>
 </main>
 
 <style>
-    main {
+    :global(body) {
         color: red;
         background-color: pink;
+        margin: 0;
     }
 
     h1 {
