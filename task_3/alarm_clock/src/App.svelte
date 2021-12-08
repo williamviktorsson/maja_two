@@ -1,21 +1,19 @@
 <script>
+    import DigitalClock from "./DigitalClock.svelte";
     import { Clock } from "./clock.js";
     import { fly, fade, slide, draw } from "svelte/transition";
-    import { spring, tweened } from "svelte/motion"
+    import { spring, tweened } from "svelte/motion";
 
     let clock = new Clock(13, 37);
 
-    let hour = spring(clock._hour)
-    let minute = spring(clock._minute)
+    let minute = spring(clock._minute);
 
     clock.alarm = "13:50";
-
 
     function tick() {
         clock.tick();
         clock = clock;
-        hour.set(clock._hour);
-        minute.set(clock._minute)
+        minute.set(clock._minute + clock._hour*60);
     }
 
     setInterval(tick, 1000);
@@ -54,23 +52,11 @@
             class="hour"
             y1="0"
             y2="35"
-            transform="rotate({180 + (6 / 12) * ($hour * 60 + $minute)})"
+            transform="rotate({180 + (6 / 12) *  $minute})"
         />
     </svg>
 
-    <div>
-        {#key clock.time.hour}
-            <span in:fly={{ y: -20 }}>
-                {clock.time.hour.toString().padStart(2, "0")}
-            </span>
-        {/key}
-        <span> : </span>
-        {#key clock.time.minute}
-            <span in:fly={{ y: -20 }}>
-                {clock.time.minute.toString().padStart(2, "0")}
-            </span>
-        {/key}
-    </div>
+    <DigitalClock {clock} />
 
     <button on:click={tick}> HIT ME! </button>
 
@@ -97,10 +83,26 @@
         width: 100vw;
         height: 100vh;
         color: red;
-        background-color: pink;
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 200% 200%;
         align-items: center;
         justify-content: start;
         gap: 50px;
+        animation: movement 15s ease infinite;
+    }
+
+    @keyframes movement {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
 
     .clock-face {
