@@ -41,8 +41,8 @@
         flex-direction: column;
         gap: 50px;
         padding-top: 10%;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 10% !important;
+        padding-right: 10% !important;
         padding-bottom: 5%;
         box-sizing: border-box;
     }

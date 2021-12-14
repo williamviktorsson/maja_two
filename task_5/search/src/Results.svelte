@@ -22,6 +22,10 @@
         align-items: center;
         flex-direction: column;
         overflow-y: scroll;
+        box-sizing: border-box;
+        padding-left: 10%;
+        padding-right: 10%;
+        max-width: 100%;
     }
 
     .column p {
@@ -29,14 +33,23 @@
         background-color: whitesmoke;
         border: 2px solid whitesmoke;
         padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        word-wrap: break-word;
     }
 
+    /** https://onaircode.com/html-css-custom-scrollbar-examples/ */
     ::-webkit-scrollbar {
-        width: 0; /* Remove scrollbar space */
-        background: transparent; /* Optional: just make scrollbar invisible */
+        width: 15px;
+        height: 15px;
     }
-    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
     ::-webkit-scrollbar-thumb {
-        background: #ff0000;
+        background-image: linear-gradient(45deg, #00aeff, #a68eff);
+        border-radius: 10px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
     }
 </style>
