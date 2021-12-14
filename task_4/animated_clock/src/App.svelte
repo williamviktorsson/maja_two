@@ -4,7 +4,6 @@
     import { spring, tweened } from "svelte/motion";
     import DigitalClock from "./DigitalClock.svelte";
     import AnalogClock from "./AnalogClock.svelte";
-	import { onMount } from 'svelte';
 
     let clock = new Clock(13, 37);
 
@@ -23,36 +22,24 @@
     }
 
     setInterval(tick, 1000);
-
-    let elias = [1, 2, 3];
-
-
 </script>
 
 <main>
     <!-- Inspired by: https://svelte.dev/repl/clock?version=3.38.2 -->
+    <div>
+        <AnalogClock {minutes} />
+        <DigitalClock {clock} />
+    </div>
 
-    <AnalogClock {minutes} />
+    <div>
+        <AnalogClock {minutes} />
+        <DigitalClock {clock} />
+    </div>
 
-    <DigitalClock {clock} />
-
-    <p>
-        {elias}
-    </p>
-
-    <button
-        on:click={() => {
-            elias = [...elias,]
-        }}
-    >
-        Elias sick button
-    </button>
-
-    <button on:click={tick}> HIT ME! </button>
-
-    {#if clock.isTriggered}
-        <p id="alarm" in:fly={{ y: 200 }} out:fade>VAKNA!!!!</p>
-    {/if}
+    <div>
+        <AnalogClock {minutes} />
+        <DigitalClock {clock} />
+    </div>
 </main>
 
 <style>
@@ -68,20 +55,28 @@
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
         display: flex;
-        justify-content: start;
+        justify-content: center;
         padding-top: 5%;
         padding-bottom: 5%;
         align-items: center;
+        flex-direction: row;
+        gap: 50px;
+    }
+
+    div {
+        justify-content: center;
+        align-items: center;
+        display: flex;
         flex-direction: column;
         gap: 50px;
     }
 
-    #alarm {
-        animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both
-            infinite;
-        transform: translate3d(0, 0, 0);
-        display: inline-block;
-        font-weight: bolder;
+    
+    @media (max-width: 600px) {
+        main {
+            justify-content: start;
+            flex-direction: column;
+        }
     }
 
     @keyframes gradient {
