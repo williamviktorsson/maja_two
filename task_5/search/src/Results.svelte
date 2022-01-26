@@ -4,19 +4,20 @@
 </script>
 
 {#if json && "data" in json && "items" in json.data && json.data.items.length > 0}
-    <div class="column">
+    <div>
         {#each json.data.items as item}
-            <p transition:fade>{JSON.stringify(item)}</p>
+            <p in:fade>{JSON.stringify(item)}</p>
         {/each}
     </div>
 {:else if json}
-    <div class="column">
-        <p transition:fade>{JSON.stringify(json)}</p>
+    <div>
+        <p in:fade>{JSON.stringify(json)}</p>
     </div>
-{/if}
+{/if}  
+
 
 <style>
-    .column {
+    div {
         display: flex;
         justify-content: start;
         align-items: center;
@@ -28,7 +29,7 @@
         max-width: 100%;
     }
 
-    .column p {
+    p {
         border-radius: 25px;
         background-color: whitesmoke;
         border: 2px solid whitesmoke;

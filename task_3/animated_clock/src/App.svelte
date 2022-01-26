@@ -4,7 +4,9 @@
     import { spring, tweened } from "svelte/motion";
     import DigitalClock from "./DigitalClock.svelte";
     import AnalogClock from "./AnalogClock.svelte";
-	import { onMount } from 'svelte';
+    import ProgressClock from "./ProgressClock.svelte";
+    import Spinner from "./Spinner.svelte";
+    import { onMount } from "svelte";
 
     let clock = new Clock(13, 37);
 
@@ -25,8 +27,6 @@
     setInterval(tick, 1000);
 
     let elias = [1, 2, 3];
-
-
 </script>
 
 <main>
@@ -34,25 +34,9 @@
 
     <AnalogClock {minutes} />
 
-    <DigitalClock {clock} />
+    <Spinner {minutes} />
 
-    <p>
-        {elias}
-    </p>
-
-    <button
-        on:click={() => {
-            elias = [...elias,]
-        }}
-    >
-        Elias sick button
-    </button>
-
-    <button on:click={tick}> HIT ME! </button>
-
-    {#if clock.isTriggered}
-        <p id="alarm" in:fly={{ y: 200 }} out:fade>VAKNA!!!!</p>
-    {/if}
+    <ProgressClock {minutes} />
 </main>
 
 <style>
@@ -67,14 +51,17 @@
         background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
-        display: flex;
-        justify-content: start;
+        display: grid;
+        justify-content: center;
         padding-top: 5%;
         padding-bottom: 5%;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
+        grid-column: auto 3;
         gap: 50px;
     }
+
+
 
     #alarm {
         animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both

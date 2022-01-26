@@ -7,18 +7,15 @@
         );
         const json = await res.json();
 
-        // delay to show spinner. is this a good idea lol ?
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        if (res.ok) {
+         if (res.ok) {
             return json;
         } else {
             throw new Error(json);
-        }
+        } 
     }
 </script>
 
-<div class="row">
+<div>
     <form
         on:submit|preventDefault={() => {
             $promise = search();
@@ -29,7 +26,7 @@
 </div>
 
 <style>
-    .row {
+    div {
         display: flex;
         gap: 10px;
         width: 50%;

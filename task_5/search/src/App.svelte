@@ -3,6 +3,7 @@
     import Results from "./Results.svelte";
     import Search from "./Search.svelte";
     import { promise } from "./stores.js";
+
 </script>
 
 <main>
@@ -18,6 +19,7 @@
 </main>
 
 <style>
+    
     :global(body) {
         padding: 0;
         margin: 0;
@@ -41,8 +43,8 @@
         flex-direction: column;
         gap: 50px;
         padding-top: 10%;
-        padding-left: 10% !important;
-        padding-right: 10% !important;
+        padding-left: 10%;
+        padding-right: 10%;
         padding-bottom: 5%;
         box-sizing: border-box;
     }
