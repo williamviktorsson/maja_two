@@ -65,13 +65,13 @@
 
 <svelte:window on:keydown|preventDefault={handleKeyDown} />
 
-<div>
+<div id="container">
 	<video
 		id="vid"
 		poster="https://sveltejs.github.io/assets/caminandes-llamigos.jpg"
 		src="https://sveltejs.github.io/assets/caminandes-llamigos.mp4"
-		on:mousedown={handleMousedown}
-		on:mouseup={handleMouseup}
+		on:mousedown|preventDefault|stopPropagation={handleMousedown}
+		on:mouseup|preventDefault|stopPropagation={handleMouseup}
 		bind:currentTime={time}
 		bind:duration
 		bind:paused
@@ -82,10 +82,10 @@
 	<div
 		class="controls"
 		style="opacity: {duration && showControls ? 1 : 0}"
-		on:mousemove={handleMove}
-		on:touchmove|preventDefault={handleMove}
-		on:mousedown={handleMove}
-		on:mouseup={handleMove}
+		on:mousemove|preventDefault|stopPropagation={handleMove}
+		on:touchmove|preventDefault|stopPropagation={handleMove}
+		on:mousedown|preventDefault|stopPropagation={handleMove}
+		on:mouseup|preventDefault|stopPropagation={handleMove}
 	>
 		<div class="info">
 			<span class="time">{format(time)}</span>
@@ -98,15 +98,26 @@
 </div>
 
 <style>
-	div {
+	#container {
 		position: relative;
+		height: 100%;
+		width: 100%;
 	}
 
 	.controls {
 		position: absolute;
 		bottom: 0;
+		left: 0;
+		right: 0;
 		width: 100%;
 		transition: opacity 1s;
+		margin-bottom: 0;
+		padding-bottom: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-items: end;
+		align-content: flex-end;
 	}
 
 	.info {
@@ -116,7 +127,6 @@
 	}
 
 	span {
-		padding: 0.2em 0.5em;
 		color: white;
 		text-shadow: 0 0 8px black;
 		font-size: 1.4em;
@@ -132,9 +142,8 @@
 	}
 
 	progress {
-		display: block;
 		width: 100%;
-		height: 10px;
+		height: 20px;
 		-webkit-appearance: none;
 		appearance: none;
 	}
@@ -148,6 +157,10 @@
 	}
 
 	video {
+		position: absolute;
 		width: 100%;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 </style>
