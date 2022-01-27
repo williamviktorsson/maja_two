@@ -59,9 +59,36 @@
                             document.activeElement.blur();
                     }}
                 >
-                    {is_fullscreen ? "Minimize" : "Fullscreen"}
+                    {is_fullscreen ? "Minimize" : "Theatre Mode"}
                 </Button>
             </div>
+
+            {#if is_fullscreen}
+                <div id="gigascreen">
+                    <Button
+                        size="small"
+                        class="secondary-color"
+                        on:click={() => {
+                            // do not focus the fullscreenbutton if clicked
+                            // this is because otherwise clicking space will cause
+                            // the video player to maximize/minimize instead of pause/play
+                            // when space is clicked
+                            if (document.activeElement != document.body)
+                                document.activeElement.blur();
+
+                            let div = document.getElementById("vid");
+                            if (div.requestFullscreen) div.requestFullscreen();
+                            else if (div.webkitRequestFullscreen)
+                                div.webkitRequestFullscreen();
+                            else if (div.msRequestFullScreen)
+                                div.msRequestFullScreen();
+                        }}
+                    >
+                        {"Gigascreen"}
+                    </Button>
+                </div>
+            {/if}
+
             <Player />
         </div>
     </Overlay>
@@ -103,6 +130,14 @@
         bottom: 0%;
     }
 
+    #video.fullscreen #gigascreen {
+        position: absolute;
+        top: 10px; /* position the top  edge of the element at the middle of the parent */
+        left: 50%; /* position the left edge of the element at the middle of the parent */
+
+        transform: translate(-50%,  0);
+        z-index: 100;
+    }
     #video #close {
         position: absolute;
         top: -10px;
