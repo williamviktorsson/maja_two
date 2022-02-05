@@ -7,7 +7,8 @@
 </script>
 
 <main>
-    <Search />
+
+    <Search/>
 
     {#await $promise}
         <Spinner />
@@ -19,7 +20,6 @@
 </main>
 
 <style>
-    
     :global(body) {
         padding: 0;
         margin: 0;
