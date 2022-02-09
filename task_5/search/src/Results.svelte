@@ -4,20 +4,23 @@
 </script>
 
 {#if json && "data" in json && "items" in json.data && json.data.items.length > 0}
-    <div>
+    <div id = "item-holder">
         {#each json.data.items as item}
-            <p in:fade>{JSON.stringify(item)}</p>
+            <div id = "item">
+                {#each Object.entries(item) as [key, value]}
+                    <p in:fade>{JSON.stringify(value)}</p>
+                {/each}
+            </div>
         {/each}
     </div>
 {:else if json}
     <div>
         <p in:fade>{JSON.stringify(json)}</p>
     </div>
-{/if}  
-
+{/if}
 
 <style>
-    div {
+    #item-holder {
         display: flex;
         justify-content: start;
         align-items: center;
@@ -27,9 +30,10 @@
         padding-left: 10%;
         padding-right: 10%;
         max-width: 100%;
+        row-gap: 20px;
     }
 
-    p {
+    #item {
         border-radius: 25px;
         background-color: whitesmoke;
         border: 2px solid whitesmoke;
@@ -37,6 +41,12 @@
         width: 100%;
         box-sizing: border-box;
         word-wrap: break-word;
+    }
+
+    p {
+                border: 2px solid black;
+                padding: 5px;
+
     }
 
     /** https://onaircode.com/html-css-custom-scrollbar-examples/ */
