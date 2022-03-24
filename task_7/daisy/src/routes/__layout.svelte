@@ -8,11 +8,11 @@
   });
 
   const THEMES = {
-    DARK: "aqua",
+    DARK: "dracula",
     LIGHT: "cupcake",
   };
 
-  let currentTheme = THEMES.DARK;
+  let currentTheme = THEMES.LIGHT;
 
   const toggleTheme = () => {
     currentTheme = currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
@@ -49,7 +49,7 @@
 
         <div class="flex-1 px-2 mx-2">
           <!-- Navbar left item -->
-          🐟
+          🧛
           <div class="inline-block">
             <div class="form-control">
               <label class="cursor-pointer label">

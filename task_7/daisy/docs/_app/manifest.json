@@ -1,0 +1,81 @@
+{
+  ".svelte-kit/runtime/client/start.js": {
+    "file": "start-cdc640a2.js",
+    "src": ".svelte-kit/runtime/client/start.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ],
+    "dynamicImports": [
+      "src/routes/__layout.svelte",
+      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/index.svelte",
+      "src/routes/knappar/index.svelte",
+      "src/routes/wordle/index.svelte",
+      "src/routes/annat.svelte"
+    ]
+  },
+  "src/routes/__layout.svelte": {
+    "file": "pages/__layout.svelte-8d2ddded.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ],
+    "css": [
+      "assets/pages/__layout.svelte-13fb85d9.css"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "error.svelte-fab707de.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "pages/index.svelte-9203ec5d.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ]
+  },
+  "src/routes/knappar/index.svelte": {
+    "file": "pages/knappar/index.svelte-220f6511.js",
+    "src": "src/routes/knappar/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ]
+  },
+  "src/routes/wordle/index.svelte": {
+    "file": "pages/wordle/index.svelte-2d512c07.js",
+    "src": "src/routes/wordle/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ],
+    "css": [
+      "assets/pages/wordle/index.svelte-63b7c54d.css"
+    ]
+  },
+  "src/routes/annat.svelte": {
+    "file": "pages/annat.svelte-b155bd8b.js",
+    "src": "src/routes/annat.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-f9eb172f.js"
+    ]
+  },
+  "_vendor-f9eb172f.js": {
+    "file": "chunks/vendor-f9eb172f.js"
+  }
+}

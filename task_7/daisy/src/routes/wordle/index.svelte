@@ -1,5 +1,6 @@
 <script>
     import { fly } from "svelte/transition";
+    import words from "$lib/words.json";
 
     let grid = [
         ["", "", "", "", ""],
@@ -10,25 +11,74 @@
         ["", "", "", "", ""],
     ];
 
-    let word = "HORSE";
-    let corrects = [];
-    let contains = [];
+    let keys_one = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Å"];
+    let keys_two = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ö", "Ä"];
+    let keys_three = ["Z", "X", "C", "V", "B", "N", "M"];
+
+    let word,
+        corrects,
+        contains,
+        incorrects,
+        success,
+        failed,
+        notword,
+        showShort;
 
     let colindex = 0;
     let rowindex = 0;
 
     function handleKeydown(event) {
+        showShort = false;
+        if (failed || success) {
+            return;
+        }
         let key = event.key;
         if (key === "Backspace") {
             deleteKey();
         } else if (key === "Enter") {
             if (colindex == 5) {
+                let temp = grid[rowindex].join("").toLowerCase();
+                if (!words.includes(temp)) {
+                    notword = true;
+                    setTimeout(() => {
+                        notword = false;
+                    }, 1500);
+                    return;
+                }
                 colindex = 0;
+                if (temp == word.toLowerCase()) {
+                    success = true;
+                }
+
+                for (let index = 0; index < grid[rowindex].length; index++) {
+                    const letter = grid[rowindex][index];
+                    if (word.includes(letter) && !contains.includes(letter)) {
+                        contains.push(letter);
+                    }
+                    if (word[index] == letter && !corrects.includes(letter)) {
+                        corrects.push(letter);
+                    }
+                    if (
+                        !contains.includes(letter) &&
+                        !corrects.includes(letter) &&
+                        !incorrects.includes(letter)
+                    ) {
+                        incorrects.push(letter);
+                    }
+                }
+
                 rowindex++;
+                contains = contains;
+                corrects = corrects;
+                incorrects = incorrects;
+
+                if (rowindex == 6 && !success) {
+                    failed = true;
+                }
             } else {
-                showModal = true;
+                showShort = true;
                 setTimeout(() => {
-                    showModal = false;
+                    showShort = false;
                 }, 1500);
             }
         } else {
@@ -38,19 +88,35 @@
         }
     }
 
-    let showModal = false;
+    function reset() {
+        word =
+            words.length > 0
+                ? words[Math.floor(Math.random() * words.length)].toUpperCase()
+                : "HORSE";
+        corrects = [];
+        contains = [];
+        incorrects = [];
+        success = false;
+        failed = false;
+        notword = false;
+        showShort = false;
+
+        colindex = 0;
+        rowindex = 0;
+        grid = [
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+        ];
+    }
 
     function placeKey(key) {
         let temp = key.toUpperCase();
         if (colindex < 5 && rowindex < 6) {
             grid[rowindex][colindex] = temp;
-            if (word.includes(temp) && !contains.includes(temp)) {
-                contains.push(temp);
-            }
-
-            if (word[colindex] == temp && !corrects.includes(temp)) {
-                corrects.push(temp);
-            }
             grid = grid;
             colindex++;
         }
@@ -62,6 +128,8 @@
             grid = grid;
         }
     }
+
+    reset();
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -76,9 +144,11 @@
                     class:correct={rowi < rowindex &&
                         grid[rowi][coli] != "" &&
                         word[coli] == grid[rowi][coli]}
+                    class:incorrect={rowi < rowindex &&
+                        incorrects.includes(grid[rowi][coli])}
                     disabled
                     type="text"
-                    class="card card-bordered w-20"
+                    class="card card-bordered w-20 pending-use"
                     bind:value={grid[rowi][coli]}
                 />
             {/each}
@@ -88,194 +158,172 @@
     <div class="h-20" />
 
     <div class="flex justify-center gap-1 my-1 w-full">
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("Q")}
-            class:corrects={corrects.includes("Q")}
-            on:click={() => placeKey("Q")}>Q</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("W")}
-            class:corrects={corrects.includes("W")}
-            on:click={() => placeKey("W")}>W</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("E")}
-            class:corrects={corrects.includes("E")}
-            on:click={() => placeKey("E")}>E</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("R")}
-            class:corrects={corrects.includes("R")}
-            on:click={() => placeKey("R")}>R</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("T")}
-            class:corrects={corrects.includes("T")}
-            on:click={() => placeKey("T")}>T</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("Y")}
-            class:corrects={corrects.includes("Y")}
-            on:click={() => placeKey("Y")}>Y</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("U")}
-            class:corrects={corrects.includes("U")}
-            on:click={() => placeKey("U")}>U</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("I")}
-            class:corrects={corrects.includes("I")}
-            on:click={() => placeKey("I")}>I</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("O")}
-            class:corrects={corrects.includes("O")}
-            on:click={() => placeKey("O")}>O</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("P")}
-            class:corrects={corrects.includes("P")}
-            on:click={() => placeKey("P")}>P</kbd
-        >
+        {#each keys_one as key}
+            <kbd
+                class="kbd pending-use"
+                class:contains={contains.includes(key)}
+                class:correct={corrects.includes(key)}
+                class:incorrect={incorrects.includes(key)}
+                on:click={() => placeKey(key)}>{key}</kbd
+            >
+        {/each}
     </div>
     <div class="flex justify-center gap-1 my-1 w-full">
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("A")}
-            class:corrects={corrects.includes("A")}
-            on:click={() => placeKey("A")}>A</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("S")}
-            class:corrects={corrects.includes("S")}
-            on:click={() => placeKey("S")}>S</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("D")}
-            class:corrects={corrects.includes("D")}
-            on:click={() => placeKey("D")}>D</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("F")}
-            class:corrects={corrects.includes("F")}
-            on:click={() => placeKey("F")}>F</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("G")}
-            class:corrects={corrects.includes("G")}
-            on:click={() => placeKey("G")}>G</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("H")}
-            class:corrects={corrects.includes("H")}
-            on:click={() => placeKey("H")}>H</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("J")}
-            class:corrects={corrects.includes("J")}
-            on:click={() => placeKey("J")}>J</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("K")}
-            class:corrects={corrects.includes("K")}
-            on:click={() => placeKey("K")}>K</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("L")}
-            class:corrects={corrects.includes("L")}
-            on:click={() => placeKey("L")}>L</kbd
-        >
+        {#each keys_two as key}
+            <kbd
+                class="kbd pending-use"
+                class:contains={contains.includes(key)}
+                class:correct={corrects.includes(key)}
+                class:incorrect={incorrects.includes(key)}
+                on:click={() => placeKey(key)}>{key}</kbd
+            >
+        {/each}
     </div>
     <div class="flex justify-center gap-1 my-1 w-full">
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("Z")}
-            class:corrects={corrects.includes("Z")}
-            on:click={() => placeKey("Z")}>Z</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("X")}
-            class:corrects={corrects.includes("X")}
-            on:click={() => placeKey("X")}>X</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("C")}
-            class:corrects={corrects.includes("C")}
-            on:click={() => placeKey("C")}>C</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("V")}
-            class:corrects={corrects.includes("V")}
-            on:click={() => placeKey("V")}>V</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("B")}
-            class:corrects={corrects.includes("B")}
-            on:click={() => placeKey("B")}>B</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("N")}
-            class:corrects={corrects.includes("N")}
-            on:click={() => placeKey("N")}>N</kbd
-        >
-        <kbd
-            class="kbd"
-            class:contains={contains.includes("M")}
-            class:corrects={corrects.includes("M")}
-            on:click={() => placeKey("M")}>M</kbd
-        >
+        {#each keys_three as key}
+            <kbd
+                class="kbd pending-use"
+                class:contains={contains.includes(key)}
+                class:correct={corrects.includes(key)}
+                class:incorrect={incorrects.includes(key)}
+                on:click={() => placeKey(key)}>{key}</kbd
+            >
+        {/each}
     </div>
 </main>
 
-{#if showModal}
-    {#key showModal}
-        <div
-            in:fly={{ x: -2000 }}
-            out:fly={{ x: 200 }}
-            role="alert"
-            class="fade alert alert-warning show alert-enter-done w-80 self-center"
-        >
-            😕 Too short of a word
-        </div>
-    {/key}
-{/if}
+<div
+    id="popups"
+    class="fixed flex h-screen w-screen justify-center items-center"
+>
+    {#if showShort}
+        {#key showShort}
+            <div
+                class="fade alert  alert-warning shadow-lg w-80 self-center"
+                in:fly={{ x: -2000 }}
+                out:fly={{ x: 200 }}
+            >
+                <div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                        /></svg
+                    >
+
+                    <span>Too short of a word!</span>
+                </div>
+            </div>
+        {/key}
+    {/if}
+
+    {#if notword}
+        {#key notword}
+            <div
+                class="fade alert  alert-warning shadow-lg w-80 self-center"
+                in:fly={{ x: -2000 }}
+                out:fly={{ x: 200 }}
+            >
+                <div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                        /></svg
+                    >
+
+                    <span>Not a word!</span>
+                </div>
+            </div>
+        {/key}
+    {/if}
+
+    {#if failed}
+        {#key failed}
+            <div
+                class="fade alert  alert-error shadow-lg w-80 self-center"
+                in:fly={{ x: -2000 }}
+                out:fly={{ x: 200 }}
+            >
+                <div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        /></svg
+                    >
+
+                    <span>{word}</span>
+                </div>
+                <div class="flex-none">
+                    <button class="btn btn-sm btn-primary" on:click={reset}
+                        >Play again</button
+                    >
+                </div>
+            </div>
+        {/key}
+    {/if}
+    {#if success}
+        {#key success}
+            <div
+                class="fade alert alert-success shadow-lg w-80 self-center place-self-center"
+                in:fly={{ x: -2000 }}
+                out:fly={{ x: 200 }}
+            >
+                <div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        /></svg
+                    >
+
+                    <span>Correct!</span>
+                </div>
+                <div class="flex-none">
+                    <button class="btn btn-sm btn-primary" on:click={reset}
+                        >Play again</button
+                    >
+                </div>
+            </div>
+        {/key}
+    {/if}
+</div>
 
 <style>
     input {
         text-align: center;
     }
 
-    input.contains {
-        background-color: rgb(233, 233, 97);
-        border-color: yellow;
+    *:not(#popups) {
+        pointer-events: auto;
     }
 
-    input.correct {
-        background-color: rgb(81, 216, 81);
-        border-color: green;
+    #popups {
+        pointer-events: none;
     }
 </style>

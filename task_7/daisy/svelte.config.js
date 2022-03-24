@@ -20,7 +20,7 @@ const config = {
 	}
 	,
 	paths: {
-		base: dev ? '' : '/jaget',
+		base: dev ? '' : '/maja_two/task_7/daisy/docs',
 	},
 };
 
