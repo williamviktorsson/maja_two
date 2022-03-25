@@ -1,3 +1,9 @@
+<!-- 
+    Notera att du kan göra en mapp med ett namn, i detta fall wordle,
+    och då kommer navigering till den mappen ladda sidan i index.html
+    Du kan också om du vill skippa mappen och bara direkt göra en fil som heter "wordle.svelte" under /routes
+    Men jag föredrar undermappar för ofta kommer en sida i en undermapp byggas upp av komponenter som man lägger i den undermappen.
+-->
 <script>
     import { fly } from "svelte/transition";
     import words from "$lib/words.json";
@@ -11,8 +17,8 @@
         ["", "", "", "", ""],
     ];
 
-    let keys_one = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Å"];
-    let keys_two = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ö", "Ä"];
+    let keys_one = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
+    let keys_two = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     let keys_three = ["Z", "X", "C", "V", "B", "N", "M"];
 
     let word,
@@ -29,13 +35,18 @@
 
     function handleKeydown(event) {
         showShort = false;
-        if (failed || success) {
-            return;
-        }
+
         let key = event.key;
         if (key === "Backspace") {
+            if (failed || success) {
+                return;
+            }
             deleteKey();
         } else if (key === "Enter") {
+            if (failed || success) {
+                reset();
+                return;
+            }
             if (colindex == 5) {
                 let temp = grid[rowindex].join("").toLowerCase();
                 if (!words.includes(temp)) {
@@ -82,6 +93,9 @@
                 }, 1500);
             }
         } else {
+            if (failed || success) {
+                return;
+            }
             if (String.fromCharCode(event.keyCode).match(/(\w|\s)/g)) {
                 placeKey(key);
             }

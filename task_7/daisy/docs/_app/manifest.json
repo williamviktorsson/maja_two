@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-9675ecda.js",
+    "file": "start-8d69aace.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -10,13 +10,12 @@
       "src/routes/__layout.svelte",
       ".svelte-kit/runtime/components/error.svelte",
       "src/routes/index.svelte",
-      "src/routes/knappar/index.svelte",
       "src/routes/wordle/index.svelte",
       "src/routes/annat.svelte"
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-8d2ddded.js",
+    "file": "pages/__layout.svelte-333f6a85.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -24,7 +23,7 @@
       "_vendor-f9eb172f.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-13fb85d9.css"
+      "assets/pages/__layout.svelte-51154933.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -45,17 +44,8 @@
       "_vendor-f9eb172f.js"
     ]
   },
-  "src/routes/knappar/index.svelte": {
-    "file": "pages/knappar/index.svelte-220f6511.js",
-    "src": "src/routes/knappar/index.svelte",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-f9eb172f.js"
-    ]
-  },
   "src/routes/wordle/index.svelte": {
-    "file": "pages/wordle/index.svelte-2d512c07.js",
+    "file": "pages/wordle/index.svelte-96f68813.js",
     "src": "src/routes/wordle/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -67,7 +57,7 @@
     ]
   },
   "src/routes/annat.svelte": {
-    "file": "pages/annat.svelte-b155bd8b.js",
+    "file": "pages/annat.svelte-5012d187.js",
     "src": "src/routes/annat.svelte",
     "isEntry": true,
     "isDynamicEntry": true,

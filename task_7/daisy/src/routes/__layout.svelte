@@ -69,7 +69,6 @@
           <ul class="menu menu-horizontal">
             <!-- Navbar menu content here -->
             <li><a href="/">Hem</a></li>
-            <li><a href="knappar">Knappar</a></li>
             <li><a href="annat">Annat</a></li>
             <li><a href="wordle">Wordle</a></li>
           </ul>
@@ -84,7 +83,6 @@
       <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
         <!-- Sidebar content here -->
         <li><a href="/">Hem</a></li>
-        <li><a href="knappar">Knappar</a></li>
         <li><a href="annat">Annat</a></li>
         <li><a href="wordle">Wordle</a></li>
       </ul>
