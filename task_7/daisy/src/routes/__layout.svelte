@@ -68,7 +68,7 @@
         <div class="flex-none hidden lg:block">
           <ul class="menu menu-horizontal">
             <!-- Navbar menu content here -->
-            <li><a href="#">Hem</a></li>
+            <li><a href="/">Hem</a></li>
             <li><a href="knappar">Knappar</a></li>
             <li><a href="annat">Annat</a></li>
             <li><a href="wordle">Wordle</a></li>
@@ -83,7 +83,7 @@
       <label for="my-drawer-3" class="drawer-overlay" />
       <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
         <!-- Sidebar content here -->
-        <li><a href="#">Hem</a></li>
+        <li><a href="/">Hem</a></li>
         <li><a href="knappar">Knappar</a></li>
         <li><a href="annat">Annat</a></li>
         <li><a href="wordle">Wordle</a></li>
