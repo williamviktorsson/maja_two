@@ -1,27 +1,11 @@
 <script>
   import "../app.css";
-  import { onMount } from "svelte";
-  import { themeChange } from "theme-change";
-
-  onMount(async () => {
-    themeChange(false);
-  });
-
-  const THEMES = {
-    DARK: "dracula",
-    LIGHT: "cupcake",
-  };
-
-  let currentTheme = THEMES.LIGHT;
+  import { theme, THEMES } from "$lib/stores/theme";
 
   const toggleTheme = () => {
-    currentTheme = currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
-    if (currentTheme === THEMES.DARK) {
-      document.documentElement.setAttribute("data-theme", THEMES.DARK);
-    } else {
-      document.documentElement.setAttribute("data-theme", THEMES.LIGHT);
-    }
+    $theme = $theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
   };
+  
 </script>
 
 <main>
@@ -49,14 +33,14 @@
 
         <div class="flex-1 px-2 mx-2">
           <!-- Navbar left item -->
-          🧛
+          📜
           <div class="inline-block">
             <div class="form-control">
               <label class="cursor-pointer label">
                 <input
                   type="checkbox"
                   class="toggle toggle-primary"
-                  checked={currentTheme !== THEMES.DARK}
+                  checked={$theme !== THEMES.DARK}
                   on:change={toggleTheme}
                 />
               </label>

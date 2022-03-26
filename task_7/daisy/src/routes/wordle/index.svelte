@@ -6,7 +6,7 @@
 -->
 <script>
     import { fly } from "svelte/transition";
-    import words from "$lib/words.json";
+    import words from "$lib/data/words.json";
 
     let grid = [
         ["", "", "", "", ""],
@@ -19,7 +19,7 @@
 
     let keys_one = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     let keys_two = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-    let keys_three = ["Z", "X", "C", "V", "B", "N", "M"];
+    let keys_three = ["⌦", "Z", "X", "C", "V", "B", "N", "M", "⏎"];
 
     let word,
         corrects,
@@ -33,23 +33,22 @@
     let colindex = 0;
     let rowindex = 0;
 
-    function handleKeydown(event) {
+    function handleKeydown(key) {
         showShort = false;
 
-        let key = event.key;
-        if (key === "Backspace") {
+        if (key === "BACKSPACE" || key === "⌦") {
             if (failed || success) {
                 return;
             }
             deleteKey();
-        } else if (key === "Enter") {
+        } else if (key === "ENTER" || key === "⏎") {
             if (failed || success) {
                 reset();
                 return;
             }
             if (colindex == 5) {
-                let temp = grid[rowindex].join("").toLowerCase();
-                if (!words.includes(temp)) {
+                let temp = grid[rowindex].join("").toUpperCase();
+                if (!words.includes(temp.toLowerCase())) {
                     notword = true;
                     setTimeout(() => {
                         notword = false;
@@ -57,7 +56,7 @@
                     return;
                 }
                 colindex = 0;
-                if (temp == word.toLowerCase()) {
+                if (temp == word.toUpperCase()) {
                     success = true;
                 }
 
@@ -146,7 +145,7 @@
     reset();
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window on:keydown={(event) => handleKeydown(event.key.toUpperCase())} />
 
 <main class="m-20 flex-column justify-center gap-20">
     {#each grid as row, rowi}
@@ -178,7 +177,8 @@
                 class:contains={contains.includes(key)}
                 class:correct={corrects.includes(key)}
                 class:incorrect={incorrects.includes(key)}
-                on:click={() => placeKey(key)}>{key}</kbd
+                class:rotate={key === "⌦"}
+                on:click={() => handleKeydown(key)}>{key}</kbd
             >
         {/each}
     </div>
@@ -189,7 +189,8 @@
                 class:contains={contains.includes(key)}
                 class:correct={corrects.includes(key)}
                 class:incorrect={incorrects.includes(key)}
-                on:click={() => placeKey(key)}>{key}</kbd
+                class:rotate={key === "⌦"}
+                on:click={() => handleKeydown(key)}>{key}</kbd
             >
         {/each}
     </div>
@@ -197,10 +198,11 @@
         {#each keys_three as key}
             <kbd
                 class="kbd pending-use"
+                class:rotate={key === "⌦"}
                 class:contains={contains.includes(key)}
                 class:correct={corrects.includes(key)}
                 class:incorrect={incorrects.includes(key)}
-                on:click={() => placeKey(key)}>{key}</kbd
+                on:click={() => handleKeydown(key)}>{key}</kbd
             >
         {/each}
     </div>
@@ -339,5 +341,9 @@
 
     #popups {
         pointer-events: none;
+    }
+
+    .rotate {
+        transform: rotate(180deg);
     }
 </style>

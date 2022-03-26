@@ -20,7 +20,6 @@
   },
   "type": "module",
   "dependencies": {
-    "daisyui": "^2.2.0",
-    "theme-change": "^2.0.2"
+    "daisyui": "^2.2.0"
   }
 }
