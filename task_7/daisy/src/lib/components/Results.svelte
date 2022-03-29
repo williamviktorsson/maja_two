@@ -47,6 +47,7 @@
     p {
         border: 2px solid black;
         padding: 5px;
+        margin: 5px;
     }
 
     /** https://onaircode.com/html-css-custom-scrollbar-examples/ */
