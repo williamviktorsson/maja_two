@@ -8,30 +8,28 @@
     import { fly } from "svelte/transition";
     import words from "$lib/data/words.json";
 
-    let grid = [
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-    ];
+    const STATUS = {
+        CONTAINS: "CONTAINS",
+        CORRECT: "CORRECT",
+        INCORRECT: "INCORRECT",
+    };
 
     let keys_one = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     let keys_two = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     let keys_three = ["⌦", "Z", "X", "C", "V", "B", "N", "M", "⏎"];
 
     let word,
-        corrects,
-        contains,
-        incorrects,
         success,
         failed,
         notword,
-        showShort;
-
-    let colindex = 0;
-    let rowindex = 0;
+        showShort,
+        contains,
+        corrects,
+        incorrects,
+        guesses,
+        grid,
+        colindex,
+        rowindex;
 
     function handleKeydown(key) {
         showShort = false;
@@ -60,19 +58,36 @@
                     success = true;
                 }
 
+                let occurances = {};
+                let tempcorrects = {};
+                let tempcontains = {};
+
                 for (let index = 0; index < grid[rowindex].length; index++) {
                     const letter = grid[rowindex][index];
-                    if (word.includes(letter) && !contains.includes(letter)) {
-                        contains.push(letter);
-                    }
-                    if (word[index] == letter && !corrects.includes(letter)) {
-                        corrects.push(letter);
-                    }
+                    occurances[letter] = word.match(
+                        new RegExp(word[index], "g") || []
+                    ).length;
+
+                    tempcorrects[letter] = tempcorrects[letter] ?? 0;
+                    tempcontains[letter] = tempcontains[letter] ?? 0;
+
                     if (
-                        !contains.includes(letter) &&
-                        !corrects.includes(letter) &&
-                        !incorrects.includes(letter)
+                        word[index] == letter &&
+                        tempcorrects[letter] < occurances[letter]
                     ) {
+                        guesses[rowindex][index] = STATUS.CORRECT;
+                        corrects.push(letter);
+                        tempcorrects[letter]++;
+                        tempcontains[letter]++;
+                    } else if (
+                        word.includes(letter) &&
+                        tempcontains[letter] < occurances[letter]
+                    ) {
+                        guesses[rowindex][index] = STATUS.CONTAINS;
+                        tempcontains[letter]++;
+                        contains.push(letter);
+                    } else {
+                        guesses[rowindex][index] = STATUS.INCORRECT;
                         incorrects.push(letter);
                     }
                 }
@@ -81,6 +96,7 @@
                 contains = contains;
                 corrects = corrects;
                 incorrects = incorrects;
+                guesses = guesses;
 
                 if (rowindex == 6 && !success) {
                     failed = true;
@@ -95,7 +111,9 @@
             if (failed || success) {
                 return;
             }
-            if (key.length === 1 && key.match(/[a-z]/i)) {
+            if (key == "+" && colindex < 5) {
+                placeKey(word[colindex]);
+            } else if (key.length === 1 && key.match(/[a-z]/i)) {
                 placeKey(key);
             }
         }
@@ -117,6 +135,14 @@
         colindex = 0;
         rowindex = 0;
         grid = [
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+        ];
+        guesses = [
             ["", "", "", "", ""],
             ["", "", "", "", ""],
             ["", "", "", "", ""],
@@ -147,18 +173,16 @@
 
 <svelte:window on:keydown={(event) => handleKeydown(event.key.toUpperCase())} />
 
+<p style="display:none">{word}</p>
+
 <main class="m-20 flex-column justify-center gap-20">
     {#each grid as row, rowi}
         <div class="flex justify-center gap-1 my-1 w-full">
-            {#each row as column, coli}
+            {#each row as _, coli}
                 <input
-                    class:contains={rowi < rowindex &&
-                        contains.includes(grid[rowi][coli])}
-                    class:correct={rowi < rowindex &&
-                        grid[rowi][coli] != "" &&
-                        word[coli] == grid[rowi][coli]}
-                    class:incorrect={rowi < rowindex &&
-                        incorrects.includes(grid[rowi][coli])}
+                    class:contains={guesses[rowi][coli] == STATUS.CONTAINS}
+                    class:correct={guesses[rowi][coli] == STATUS.CORRECT}
+                    class:incorrect={guesses[rowi][coli] == STATUS.INCORRECT}
                     disabled
                     type="text"
                     class="card card-bordered w-20 pending-use"
