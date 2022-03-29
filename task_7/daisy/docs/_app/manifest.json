@@ -1,71 +1,150 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-f6b21e51.js",
+    "file": "start-2d00e95b.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
-      "_vendor-c80f6f5c.js"
+      "_vendor-548886bf.js",
+      "_singletons-a6a7384f.js"
     ],
     "dynamicImports": [
       "src/routes/__layout.svelte",
-      ".svelte-kit/runtime/components/error.svelte",
+      "src/routes/__error.svelte",
       "src/routes/index.svelte",
+      "src/routes/search/index.svelte",
+      "src/routes/search/Results.svelte",
+      "src/routes/search/Spinner.svelte",
+      "src/routes/search/Search.svelte",
+      "src/routes/search/[slug].svelte",
       "src/routes/wordle/index.svelte",
       "src/routes/annat.svelte"
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-88568480.js",
+    "file": "pages/__layout.svelte-4ec73316.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-c80f6f5c.js"
+      "_vendor-548886bf.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-0a5cf349.css"
+      "assets/pages/__layout.svelte-3c42f206.css"
     ]
   },
-  ".svelte-kit/runtime/components/error.svelte": {
-    "file": "error.svelte-59e50f77.js",
-    "src": ".svelte-kit/runtime/components/error.svelte",
+  "src/routes/__error.svelte": {
+    "file": "pages/__error.svelte-c46ad820.js",
+    "src": "src/routes/__error.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-c80f6f5c.js"
+      "_vendor-548886bf.js"
+    ],
+    "css": [
+      "assets/pages/__error.svelte-1d3f32eb.css"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-54b6ddd4.js",
+    "file": "pages/index.svelte-8f9fb9bf.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-c80f6f5c.js"
+      "_vendor-548886bf.js"
+    ]
+  },
+  "src/routes/search/index.svelte": {
+    "file": "pages/search/index.svelte-fb64a9e4.js",
+    "src": "src/routes/search/index.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-548886bf.js",
+      "src/routes/search/Search.svelte",
+      "_singletons-a6a7384f.js"
+    ],
+    "css": [
+      "assets/pages/search/_slug_.svelte-09c3bf86.css"
+    ]
+  },
+  "src/routes/search/Search.svelte": {
+    "file": "pages/search/Search.svelte-85443403.js",
+    "src": "src/routes/search/Search.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-548886bf.js",
+      "_singletons-a6a7384f.js"
+    ],
+    "css": [
+      "assets/pages/search/Search.svelte-56411a39.css"
+    ]
+  },
+  "src/routes/search/Results.svelte": {
+    "file": "pages/search/Results.svelte-320170a6.js",
+    "src": "src/routes/search/Results.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-548886bf.js"
+    ],
+    "css": [
+      "assets/pages/search/Results.svelte-76449888.css"
+    ]
+  },
+  "src/routes/search/Spinner.svelte": {
+    "file": "pages/search/Spinner.svelte-631d26a8.js",
+    "src": "src/routes/search/Spinner.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-548886bf.js"
+    ],
+    "css": [
+      "assets/pages/search/Spinner.svelte-95448f1c.css"
+    ]
+  },
+  "src/routes/search/[slug].svelte": {
+    "file": "pages/search/_slug_.svelte-54ca97b2.js",
+    "src": "src/routes/search/[slug].svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-548886bf.js",
+      "src/routes/search/Spinner.svelte",
+      "src/routes/search/Results.svelte",
+      "src/routes/search/Search.svelte",
+      "_singletons-a6a7384f.js"
+    ],
+    "css": [
+      "assets/pages/search/_slug_.svelte-09c3bf86.css"
     ]
   },
   "src/routes/wordle/index.svelte": {
-    "file": "pages/wordle/index.svelte-cfd54778.js",
+    "file": "pages/wordle/index.svelte-e69b6cf9.js",
     "src": "src/routes/wordle/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-c80f6f5c.js"
+      "_vendor-548886bf.js"
     ],
     "css": [
       "assets/pages/wordle/index.svelte-03dd28cf.css"
     ]
   },
   "src/routes/annat.svelte": {
-    "file": "pages/annat.svelte-f36b02b6.js",
+    "file": "pages/annat.svelte-83b96af3.js",
     "src": "src/routes/annat.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-c80f6f5c.js"
+      "_vendor-548886bf.js"
     ]
   },
-  "_vendor-c80f6f5c.js": {
-    "file": "chunks/vendor-c80f6f5c.js"
+  "_vendor-548886bf.js": {
+    "file": "chunks/vendor-548886bf.js"
+  },
+  "_singletons-a6a7384f.js": {
+    "file": "chunks/singletons-a6a7384f.js"
   }
 }

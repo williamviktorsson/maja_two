@@ -1,4 +1,4 @@
-import{S as T,i as $,s as C,e as r,k as I,t as j,c as l,a as u,m as U,h as L,d as i,I as G,b as o,g as H,J as e,K as J,Q as S}from"../chunks/vendor-c80f6f5c.js";function K(p){let t,s,c,B,k,a,d,_,b,m,w,x,n,y,E,D;return{c(){t=r("div"),s=r("div"),c=r("img"),k=I(),a=r("div"),d=r("h1"),_=j("Liv och l\xE4rande i framkant!"),b=I(),m=r("p"),w=j(`Maja Beskowgymnasiet \xE4r skolan f\xF6r dig som vill ha en god grund f\xF6r
+import{S as T,i as $,s as C,e as r,k as I,t as j,c as l,a as u,m as U,h as L,d as i,I as G,b as o,g as H,J as e,K as J,Q as S}from"../chunks/vendor-548886bf.js";function K(p){let t,s,c,B,k,a,d,_,b,m,w,x,n,y,E,D;return{c(){t=r("div"),s=r("div"),c=r("img"),k=I(),a=r("div"),d=r("h1"),_=j("Liv och l\xE4rande i framkant!"),b=I(),m=r("p"),w=j(`Maja Beskowgymnasiet \xE4r skolan f\xF6r dig som vill ha en god grund f\xF6r
         fortsatta studier och ett sp\xE4nnande arbetsliv. Skolan ligger centralt
         placerad mellan stadsk\xE4rnan och Ume\xE5 universitet, vilket underl\xE4ttar f\xF6r
         n\xE4ra samarbeten och studiebes\xF6k. Inom verksamheten finns \xE4ven koppling

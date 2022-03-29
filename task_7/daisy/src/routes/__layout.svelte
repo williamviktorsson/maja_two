@@ -5,7 +5,6 @@
   const toggleTheme = () => {
     $theme = $theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
   };
-  
 </script>
 
 <main>
@@ -53,8 +52,9 @@
           <ul class="menu menu-horizontal">
             <!-- Navbar menu content here -->
             <li><a href="/">Hem</a></li>
-            <li><a href="annat">Annat</a></li>
-            <li><a href="wordle">Wordle</a></li>
+            <li><a href="/annat">Annat</a></li>
+            <li><a href="/wordle">Wordle</a></li>
+            <li><a href="/search">Sök</a></li>
           </ul>
         </div>
       </div>
@@ -67,8 +67,9 @@
       <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
         <!-- Sidebar content here -->
         <li><a href="/">Hem</a></li>
-        <li><a href="annat">Annat</a></li>
-        <li><a href="wordle">Wordle</a></li>
+        <li><a href="/annat">Annat</a></li>
+        <li><a href="/wordle">Wordle</a></li>
+        <li><a href="/search">Sök</a></li>
       </ul>
     </div>
   </div>
