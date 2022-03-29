@@ -18,6 +18,7 @@ export const theme = writable(initialValue);
 // subscribe to theme writable store changes and do the following on change
 theme.subscribe((value) => {
     if (browser) {
+        // save settings to localStorage and change the theme for the current document ( website )
         window.localStorage.setItem('theme', value);
         document.documentElement.setAttribute("data-theme", value);
     }

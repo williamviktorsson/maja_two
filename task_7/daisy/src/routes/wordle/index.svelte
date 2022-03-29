@@ -95,7 +95,7 @@
             if (failed || success) {
                 return;
             }
-            if (String.fromCharCode(event.keyCode).match(/(\w|\s)/g)) {
+            if (key.length === 1 && key.match(/[a-z]/i)) {
                 placeKey(key);
             }
         }
