@@ -15,7 +15,10 @@ const config = {
 			domain: null,
 			fallback: null,
 			precompress: false
-		})
+		}),
+		prerender: {
+			default: true
+		}
 	}
 	,
 	paths: {
