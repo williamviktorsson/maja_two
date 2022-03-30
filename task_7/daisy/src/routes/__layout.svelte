@@ -7,6 +7,13 @@
   };
 </script>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</svelte:head>
+
 <main>
   <div class="h-screen drawer w-full">
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
@@ -55,6 +62,11 @@
             <li><a href="/annat">Annat</a></li>
             <li><a href="/wordle">Wordle</a></li>
             <li><a href="/search">Sök</a></li>
+            <li>
+              <a href="https://github.com/wilvik05/wilvik05.github.io">
+                <i class="fa fa-github-square" style="font-size:36px" />
+              </a>
+            </li>
           </ul>
         </div>
       </div>
