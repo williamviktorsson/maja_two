@@ -16,7 +16,7 @@
 
     let keys_one = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     let keys_two = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-    let keys_three = ["⌦", "Z", "X", "C", "V", "B", "N", "M", "⏎"];
+    let keys_three = ["⏎", "Z", "X", "C", "V", "B", "N", "M","⌫"];
 
     let word,
         success,
@@ -34,7 +34,7 @@
     function handleKeydown(key) {
         showShort = false;
 
-        if (key === "BACKSPACE" || key === "⌦") {
+        if (key === "BACKSPACE" || key === "⌫") {
             if (failed || success) {
                 return;
             }
@@ -175,19 +175,18 @@
 
 <p style="display:none">{word}</p>
 
-<main class="m-20 flex-column justify-center gap-20">
+<main class="flex-column justify-center content-evenly h-full mt-20">
     {#each grid as row, rowi}
         <div class="flex justify-center gap-1 my-1 w-full">
             {#each row as _, coli}
-                <input
+                <div
+                    class="badge badge-outline pending-use w-20 h-10"
                     class:contains={guesses[rowi][coli] == STATUS.CONTAINS}
                     class:correct={guesses[rowi][coli] == STATUS.CORRECT}
                     class:incorrect={guesses[rowi][coli] == STATUS.INCORRECT}
-                    disabled
-                    type="text"
-                    class="card card-bordered w-20 pending-use"
-                    bind:value={grid[rowi][coli]}
-                />
+                >
+                    {grid[rowi][coli]}
+                </div>
             {/each}
         </div>
     {/each}

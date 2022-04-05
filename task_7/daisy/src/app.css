@@ -5,19 +5,19 @@
 @layer components {
 
     .pending-use {
-        @apply bg-base-300/30
+        @apply bg-base-300
     }
 
    .contains {
-        @apply bg-warning/30
+        @apply bg-warning
     }
 
     .correct {
-        @apply bg-success/30
+        @apply bg-success
     }
 
     .incorrect {
-        @apply bg-neutral-focus/30
+        @apply bg-error
     }
 
 }
