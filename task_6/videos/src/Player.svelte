@@ -4,6 +4,10 @@
 
  -->
 <script>
+
+    import { chosen_video } from "./stores.js";
+
+
 	// These values are bound to properties of the video
 	let time = 0;
 	let duration;
@@ -30,7 +34,7 @@
 		const { left, right } = this.getBoundingClientRect();
 		time = (duration * (clientX - left)) / (right - left);
 	}
-
+	
 	// we can't rely on the built-in click event, because it fires
 	// after a drag — we have to listen for clicks ourselves
 	function handleMousedown(e) {
@@ -68,8 +72,8 @@
 <div id="container">
 	<video
 		id="vid"
-		poster="https://sveltejs.github.io/assets/caminandes-llamigos.jpg"
-		src="https://sveltejs.github.io/assets/caminandes-llamigos.mp4"
+		poster={$chosen_video.poster}
+		src={$chosen_video.src}
 		on:mousedown|preventDefault|stopPropagation={handleMousedown}
 		on:mouseup|preventDefault|stopPropagation={handleMouseup}
 		bind:currentTime={time}

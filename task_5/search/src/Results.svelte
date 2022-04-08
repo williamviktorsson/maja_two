@@ -3,6 +3,9 @@
     import { fly, fade, slide, draw } from "svelte/transition";
 </script>
 
+
+
+
 {#if json && "data" in json && "items" in json.data && json.data.items.length > 0}
     <div id = "item-holder">
         {#each json.data.items as item}
@@ -20,6 +23,8 @@
 {/if}
 
 <style>
+
+
     #item-holder {
         display: flex;
         justify-content: start;
@@ -31,6 +36,7 @@
         padding-right: 10%;
         max-width: 100%;
         row-gap: 20px;
+        margin-left: 30%;
     }
 
     #item {
