@@ -1,5 +1,5 @@
 <script>
-    let question;
+    export let question;
     import { goto } from "$app/navigation";
 </script>
 

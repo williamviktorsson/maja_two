@@ -1,7 +1,6 @@
 <script>
     export let json;
     import { fly, fade, slide, draw } from "svelte/transition";
-    console.log(json);
 </script>
 
 {#if json && "data" in json && "items" in json.data && json.data.items.length > 0}

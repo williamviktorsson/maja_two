@@ -1,10 +1,11 @@
 <script>
     import Search from "$lib/components/Search.svelte";
+    import { page } from "$app/stores";
 </script>
 
 <main>
-    <Search />
-    <slot></slot>
+    <Search question={$page.params.question} />
+    <slot />
 </main>
 
 <style>
