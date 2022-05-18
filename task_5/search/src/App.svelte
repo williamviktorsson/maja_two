@@ -3,12 +3,10 @@
     import Results from "./Results.svelte";
     import Search from "./Search.svelte";
     import { promise } from "./stores.js";
-
 </script>
 
-<main>
-
-    <Search/>
+<main class:searched={$promise != undefined}>
+    <Search />
 
     {#await $promise}
         <Spinner />
@@ -47,6 +45,16 @@
         padding-right: 10%;
         padding-bottom: 5%;
         box-sizing: border-box;
+    }
+
+    main.searched {
+        background: linear-gradient(
+            -45deg,
+            #cf46232f,
+            #b9074e3a,
+            #13a2c93d,
+            #15dcaa3f
+        );
     }
 
     @keyframes gradient {
