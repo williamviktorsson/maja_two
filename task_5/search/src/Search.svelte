@@ -13,6 +13,11 @@
             throw new Error(json);
         }
     }
+
+
+  $: searched = $promise != undefined;
+
+  
 </script>
 
 <div class:searched={$promise != undefined}>
