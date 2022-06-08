@@ -20,7 +20,7 @@
       <!-- Navbar -->
       <div class="w-full navbar bg-base-300">
         <div class="flex-none lg:hidden">
-          <label for="my-drawer-3" class="btn btn-square btn-ghost">
+          <label id="drawerbutton" for="my-drawer-3" class="btn btn-square btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -55,7 +55,7 @@
         </div>
 
         <div class="flex-none hidden lg:block">
-          <ul class="menu menu-horizontal">
+          <ul id="menu-horizontal" class="menu menu-horizontal">
             <!-- Navbar menu content here -->
             <li><a href="/">Hem</a></li>
             <li><a href="/annat">Annat</a></li>

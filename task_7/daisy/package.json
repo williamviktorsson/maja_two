@@ -12,6 +12,7 @@
     "@sveltejs/adapter-static": "^1.0.0-next.29",
     "@sveltejs/kit": "^1.0.0-next.303",
     "autoprefixer": "^10.4.4",
+    "cypress": "^10.0.3",
     "postcss": "^8.4.12",
     "svelte": "^3.44.0",
     "svelte-adapter-github": "0.0.1-next.0",

@@ -21,9 +21,7 @@ const config = {
 		}
 	}
 	,
-	paths: {
-		base: dev ? '' : '/maja_daisy',
-	},
+
 };
 
 export default config;
