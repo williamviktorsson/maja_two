@@ -1,21 +1,20 @@
 <script>
-  import Spinner from "./Spinner.svelte";
-  import Results from "./Results.svelte";
-  import Search from "./Search.svelte";
-  import { promise } from "./stores.js";
-
+    import Spinner from "./Spinner.svelte";
+    import Results from "./Results.svelte";
+    import Search from "./Search.svelte";
+    import { promise } from "./stores.js";
 </script>
 
 <main class:searched={$promise != undefined}>
-  <Search />
+    <Search />
 
-  {#await $promise}
-    <Spinner />
-  {:then result}
-    <Results json={result} />
-  {:catch error}
-    <p style="color: red">{error.message}</p>
-  {/await}
+    {#await $promise}
+        <Spinner />
+    {:then result}
+        <Results json={result} />
+    {:catch error}
+        <p style="color: red">{error.message}</p>
+    {/await}
 </main>
 
 <style>
@@ -48,25 +47,25 @@
     box-sizing: border-box;
   }
 
-  main.searched {
-    background: linear-gradient(
-      -45deg,
-      #c5968a2f,
-      #c6356f3a,
-      #179dc23d,
-      #1480653f
-    );
-  }
+    main.searched {
+        background: linear-gradient(
+            -45deg,
+            #cf46232f,
+            #b9074e3a,
+            #13a2c93d,
+            #15dcaa3f
+        );
+    }
 
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
 </style>

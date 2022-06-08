@@ -30,7 +30,6 @@
         justify-content: start;
         align-items: center;
         flex-direction: column;
-        overflow-y: scroll;
         box-sizing: border-box;
         padding-left: 10%;
         padding-right: 10%;
